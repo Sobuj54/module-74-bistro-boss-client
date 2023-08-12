@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet";
+import Cover from "../../shared/Cover/Cover";
+import menuImg from "../../../assets/menu/banner3.jpg";
 
 const Menu = () => {
   return (
@@ -6,7 +8,7 @@ const Menu = () => {
       <Helmet>
         <title>Bistro Boss | Menu</title>
       </Helmet>
-      menu
+      <Cover img={menuImg} title="Our Menu"></Cover>
     </div>
   );
 };
