@@ -42,7 +42,13 @@ const Testimonials = () => {
                 itemStyles={myStyles}
                 readOnly
               />
-
+              <div>
+                <img
+                  src="https://w7.pngwing.com/pngs/403/327/png-transparent-quotation-mark-apostrophe-computer-icons-quotation-text-number-sign-thumbnail.png"
+                  className="bg-inherit w-[100px] mt-4"
+                  alt=""
+                />
+              </div>
               <p className="py-5">{review.details}</p>
               <h2 className="text-2xl text-yellow-500">{review.name}</h2>
             </div>
