@@ -5,13 +5,13 @@ import "./Featured.css";
 const Featured = () => {
   return (
     <section className="featured-item bg-fixed p-20 my-16  text-white">
-      <div className=" bg-gradient-to-tr from-slate-400 to-slate-700 opacity-90 p-5">
+      <div className=" bg-gradient-to-tr from-slate-400 to-slate-700 opacity-90 rounded-lg p-5">
         <SectionTitle
           subHeading="Check it Out"
           heading="Featured Item"></SectionTitle>
         <div className="md:flex justify-center items-center p-10 ">
           <div>
-            <img src={featuredImg} alt="" />
+            <img src={featuredImg} className="rounded-lg" alt="" />
           </div>
           <div className="ml-10">
             <p>Aug 20, 2023</p>
@@ -23,7 +23,9 @@ const Featured = () => {
               quidem ipsam asperiores repudiandae cumque ex totam temporibus!
               Repudiandae ratione molestias distinctio.
             </p>
-            <button className="btn btn-outline">Order Now</button>
+            <button className="btn btn-outline border-0 border-b-4 mt-3 ">
+              Order Now
+            </button>
           </div>
         </div>
       </div>
