@@ -5,7 +5,7 @@ const useMenu = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("menu.json")
+    fetch("https://bistro-boss-server-theta-virid.vercel.app/menu")
       .then((res) => res.json())
       .then((data) => {
         {
