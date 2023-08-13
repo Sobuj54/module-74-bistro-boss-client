@@ -1,6 +1,7 @@
 import Cover from "../../shared/Cover/Cover";
 import menuImg from "../../../assets/menu/banner3.jpg";
 import dessertImg from "../../../assets/menu/dessert-bg.jpeg";
+import pizzaImg from "../../../assets/menu/pizza-bg.jpg";
 import { Helmet } from "react-helmet-async";
 import useMenu from "../../../hooks/useMenu";
 import SectionTitle from "../../../components/Sectiontitle/SectionTitle";
@@ -32,6 +33,11 @@ const Menu = () => {
         items={desserts}
         title="dessert"
         coverImg={dessertImg}></MenuCategory>
+      {/* pizza menu items */}
+      <MenuCategory
+        items={pizza}
+        title="Pizza"
+        coverImg={pizzaImg}></MenuCategory>
     </div>
   );
 };
