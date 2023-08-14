@@ -9,6 +9,7 @@ const LogIn = () => {
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
 
+  //   creating 6 digit captcha
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -22,6 +23,7 @@ const LogIn = () => {
     console.log(email, password);
   };
 
+  //   captcha validation
   const handleValidateCaptcha = () => {
     const user_captcha_value = captchaRef.current.value;
     if (validateCaptcha(user_captcha_value)) {
