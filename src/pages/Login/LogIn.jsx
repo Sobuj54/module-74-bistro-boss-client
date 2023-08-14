@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const LogIn = () => {
-  const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContext);
 
@@ -35,8 +34,8 @@ const LogIn = () => {
   };
 
   //   captcha validation
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
     } else {
@@ -95,18 +94,13 @@ const LogIn = () => {
                   <LoadCanvasTemplate />
                 </label>
                 <input
+                  onBlur={handleValidateCaptcha}
                   type="text"
-                  ref={captchaRef}
                   name="captcha"
                   required
                   placeholder="type the captcha above"
                   className="input input-bordered"
                 />
-                <button
-                  onClick={handleValidateCaptcha}
-                  className="btn btn-outline btn-xs mt-2">
-                  Validate
-                </button>
               </div>
               <div className="form-control mt-6">
                 <input
