@@ -8,10 +8,11 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -19,6 +20,12 @@ const SignUp = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        updateUserProfile(data.name, data.photo)
+          .then(() => {
+            console.log("user has been updated");
+            reset();
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
   };
@@ -50,6 +57,19 @@ const SignUp = () => {
                   name="name"
                   required
                   placeholder="Name"
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("photo")}
+                  name="PhotoURL"
+                  required
+                  placeholder="Photo URL"
                   className="input input-bordered"
                 />
               </div>
