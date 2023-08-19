@@ -74,7 +74,7 @@ const MyCart = () => {
                 <th>
                   <button
                     onClick={() => handleDelete(item)}
-                    className="btn bg-red-500 text-white btn-lg">
+                    className="btn bg-red-500 text-white btn-md">
                     <FaTrashAlt></FaTrashAlt>
                   </button>
                 </th>

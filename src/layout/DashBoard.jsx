@@ -1,4 +1,11 @@
-import { FaCalendar, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
+import {
+  FaCalendar,
+  FaHome,
+  FaShoppingCart,
+  FaWallet,
+  FaHamburger,
+  FaFirstOrderAlt,
+} from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 
@@ -51,10 +58,14 @@ const DashBoard = () => {
             </Link>
           </li>
           <li>
-            <Link to="/menu">Our Menu</Link>
+            <Link to="/menu">
+              <FaHamburger /> Our Menu
+            </Link>
           </li>
           <li>
-            <Link to="/order/salad">Order Food</Link>
+            <Link to="/order/salad">
+              <FaFirstOrderAlt /> Order Food
+            </Link>
           </li>
           <li>
             <Link></Link>

@@ -111,7 +111,7 @@ const LogIn = () => {
                 {/* todo: make button disabled for captcha */}
                 <input
                   type="submit"
-                  disabled={false}
+                  disabled={disabled}
                   value="Login"
                   className="btn btn-primary"
                 />
