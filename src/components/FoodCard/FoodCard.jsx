@@ -2,12 +2,15 @@ import { useContext } from "react";
 import { AuthContext } from "../../ContextApi/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import useCart from "../../hooks/useCart";
 
 const FoodCard = ({ item }) => {
   const { name, image, price, recipe, _id } = item;
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  // in an array data should be called in their index order
+  const [, refetch] = useCart();
 
   const handleAddToCart = (item) => {
     console.log(item);
@@ -31,6 +34,7 @@ const FoodCard = ({ item }) => {
         .then((data) => {
           console.log(data);
           if (data.insertedId) {
+            refetch();
             Swal.fire({
               position: "top-end",
               icon: "success",
