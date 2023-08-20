@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../ContextApi/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const {
@@ -11,19 +12,40 @@ const SignUp = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
   const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+
         updateUserProfile(data.name, data.photo)
           .then(() => {
-            console.log("user has been updated");
-            reset();
+            const saveUser = { name: data.name, email: data.email };
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(saveUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  reset();
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User has been created successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  navigate("/");
+                }
+              });
           })
           .catch((error) => console.log(error));
       })
@@ -67,7 +89,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   {...register("photo")}
-                  name="PhotoURL"
+                  name="photo"
                   required
                   placeholder="Photo URL"
                   className="input input-bordered"
