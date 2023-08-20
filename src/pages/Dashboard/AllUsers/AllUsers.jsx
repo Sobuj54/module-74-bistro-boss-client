@@ -29,7 +29,9 @@ const AllUsers = () => {
       });
   };
 
-  const handleDelete = (user) => {};
+  const handleDelete = (user) => {
+    console.log(user);
+  };
 
   return (
     <div className="w-full">

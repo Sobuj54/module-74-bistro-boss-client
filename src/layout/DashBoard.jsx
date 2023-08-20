@@ -9,7 +9,7 @@ import {
   FaBook,
   FaUsers,
 } from "react-icons/fa";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 
 const DashBoard = () => {
@@ -36,77 +36,77 @@ const DashBoard = () => {
           {isAdmin ? (
             <>
               <li>
-                <Link to="/dashboard/home">
+                <NavLink to="/dashboard/home">
                   <FaHome /> Admin Home
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/dashboard/reservations">
+                <NavLink to="/dashboard/reservations">
                   <FaUtensils /> Add Item
-                </Link>
+                </NavLink>
               </li>
 
               <li>
-                <Link to="/dashboard/history">
+                <NavLink to="/dashboard/history">
                   <FaWallet></FaWallet> Manage Items
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/dashboard/history">
+                <NavLink to="/dashboard/history">
                   <FaBook></FaBook> Manage Bookings
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/dashboard/allusers">
+                <NavLink to="/dashboard/allusers">
                   <FaUsers></FaUsers> All Users
-                </Link>
+                </NavLink>
               </li>
             </>
           ) : (
             <>
               <li>
-                <Link to="/dashboard/home">
+                <NavLink to="/dashboard/home">
                   <FaHome /> User Home
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/dashboard/reservations">
+                <NavLink to="/dashboard/reservations">
                   <FaCalendar /> Reservations
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/dashboard/mycart">
+                <NavLink to="/dashboard/mycart">
                   <FaShoppingCart /> My Cart
                   <span className="badge badge-secondary">
                     +{cart?.length || 0}
                   </span>
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/dashboard/history">
+                <NavLink to="/dashboard/history">
                   <FaWallet></FaWallet> Payment History
-                </Link>
+                </NavLink>
               </li>
             </>
           )}
           <div className="divider"></div>
           <li>
-            <Link to="/">
+            <NavLink to="/">
               <FaHome /> Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/menu">
+            <NavLink to="/menu">
               <FaHamburger /> Our Menu
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/order/salad">
+            <NavLink to="/order/salad">
               <FaFirstOrderAlt /> Order Food
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link></Link>
+            <NavLink></NavLink>
           </li>
         </ul>
       </div>
