@@ -4,13 +4,14 @@ import useAuth from "./useAuth";
 
 const useCart = () => {
   // useAuth hook handles context api call
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [axiosSecure] = useAxiosSecure();
 
   // const token = localStorage.getItem("access-token");
 
   const { refetch, data: cart = [] } = useQuery({
     queryKey: ["carts", user?.email],
+    enabled: !loading, //must use this enabled otherwise login will cause problem.
     // queryFn: async () => {
     //   const res = await fetch(
     //     `http://localhost:5000/carts?email=${user?.email}`,
