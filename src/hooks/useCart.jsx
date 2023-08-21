@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
-import { AuthContext } from "../ContextApi/AuthProvider";
 import useAxiosSecure from "./useAxiosSecure";
+import useAuth from "./useAuth";
 
 const useCart = () => {
-  const { user } = useContext(AuthContext);
+  // useAuth hook handles context api call
+  const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
 
   // const token = localStorage.getItem("access-token");
