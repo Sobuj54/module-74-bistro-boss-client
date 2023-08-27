@@ -2,11 +2,30 @@ import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/Sectiontitle/SectionTitle";
 import { useForm } from "react-hook-form";
 
+const imageHostingToken = import.meta.env.VITE_image_upload_token;
+
 const AddItem = () => {
   const { register, handleSubmit } = useForm();
+  // image hosting on imgbb site
+  const imageHostingURL = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostingToken}`;
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
 
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
+
+    fetch(imageHostingURL, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageResponse) => {
+        console.log(imageResponse);
+      });
+  };
+
+  console.log(imageHostingToken);
   return (
     <div className="w-full px-10">
       <Helmet>
@@ -33,11 +52,10 @@ const AddItem = () => {
               <span className="label-text">Category*</span>
             </label>
             <select
+              defaultValue="Pick One"
               {...register("category", { required: true })}
               className="select select-bordered">
-              <option disabled defaultValue="pick one">
-                Pick One
-              </option>
+              <option disabled>Pick One</option>
               <option>Pizza</option>
               <option>Soup</option>
               <option>Salad</option>
