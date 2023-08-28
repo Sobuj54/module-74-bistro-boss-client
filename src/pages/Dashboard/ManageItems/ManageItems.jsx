@@ -23,8 +23,9 @@ const ManageItems = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/menu/${item?._id}`).then((res) => {
-          console.log("after deletion :", res.data);
+          //   console.log("after deletion :", res.data);
           if (res.data.deletedCount > 0) {
+            refetch();
             toast.success("Successfully deleted an Item !", {
               position: toast.POSITION.TOP_CENTER,
             });
@@ -33,7 +34,6 @@ const ManageItems = () => {
               position: toast.POSITION.TOP_LEFT,
             });
           }
-          refetch();
         });
       }
     });
