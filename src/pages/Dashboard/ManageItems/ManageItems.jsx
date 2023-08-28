@@ -1,12 +1,46 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/Sectiontitle/SectionTitle";
 import useMenu from "../../../hooks/useMenu";
+import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ManageItems = () => {
-  const [menu] = useMenu();
+  const [menu, , refetch] = useMenu();
+  const [axiosSecure] = useAxiosSecure();
+
+  const handleDelete = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/menu/${item?._id}`).then((res) => {
+          console.log("after deletion :", res.data);
+          if (res.data.deletedCount > 0) {
+            toast.success("Successfully deleted an Item !", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          } else {
+            toast.error("Error! Couldn't delete the Item ", {
+              position: toast.POSITION.TOP_LEFT,
+            });
+          }
+          refetch();
+        });
+      }
+    });
+  };
 
   return (
-    <div className="w-full">
+    <div className="w-full px-5">
       <Helmet>
         <title>Dashboard | Manage All Items</title>
       </Helmet>
@@ -20,9 +54,9 @@ const ManageItems = () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Item</th>
+              <th>Category</th>
+              <th>Price</th>
               <th>Update</th>
               <th>Delete</th>
             </tr>
@@ -47,19 +81,26 @@ const ManageItems = () => {
                     </div>
                   </div>
                 </td>
-                <td>Zemlak, Daniel and Leannon</td>
-                <td>Purple</td>
+                <td>{item.category}</td>
+                <td>${item.price}</td>
                 <td>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                  <button className="btn btn-success btn-md text-white">
+                    <FaPencilAlt />
+                  </button>
                 </td>
                 <td>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                  <button
+                    onClick={() => handleDelete(item)}
+                    className="btn btn-error btn-md text-white">
+                    <FaTrashAlt />
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <ToastContainer />
     </div>
   );
 };
