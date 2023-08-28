@@ -9,12 +9,12 @@ const imageHostingToken = import.meta.env.VITE_image_upload_token;
 
 const AddItem = () => {
   const [axiosSecure] = useAxiosSecure();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   // image hosting on imgbb site
   const imageHostingURL = `https://api.imgbb.com/1/upload?key=${imageHostingToken}`;
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("form data", data);
 
     const formData = new FormData();
     formData.append("image", data.image[0]);
@@ -25,7 +25,7 @@ const AddItem = () => {
     })
       .then((res) => res.json())
       .then((imageResponse) => {
-        console.log(imageResponse);
+        // console.log(imageResponse);
         if (imageResponse.success) {
           const imgURL = imageResponse.data.display_url;
           const { name, price, category, recipe } = data;
@@ -39,9 +39,14 @@ const AddItem = () => {
 
           // posting using axios
           axiosSecure.post("/menu", newItem).then((data) => {
-            console.log("data after posting : ", data.data);
+            // console.log("data after posting : ", data.data);
             if (data.data.insertedId) {
+              reset();
               toast.success("You've successfully added an item !", {
+                position: toast.POSITION.TOP_CENTER,
+              });
+            } else {
+              toast.error("Couldn't add an Item !", {
                 position: toast.POSITION.TOP_CENTER,
               });
             }
@@ -52,10 +57,10 @@ const AddItem = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Bistro Boss | Add An Item</title>
+      </Helmet>
       <div className="w-full px-10">
-        <Helmet>
-          <title>Bistro Boss | Add An Item</title>
-        </Helmet>
         <SectionTitle
           subHeading="What's New"
           heading="Add An Item"></SectionTitle>
