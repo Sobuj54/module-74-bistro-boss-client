@@ -19,7 +19,7 @@ const CheckoutForm = ({ price }) => {
       console.log(res.data);
       setClientSecret(res.data.clientSecret);
     });
-  }, []);
+  }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,7 +34,7 @@ const CheckoutForm = ({ price }) => {
     }
 
     // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });

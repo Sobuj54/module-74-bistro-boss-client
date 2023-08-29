@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuth from "./useAuth";
 
+const axiosSecure = axios.create({
+  baseURL: `http://localhost:5000`,
+});
+
 const useAxiosSecure = () => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
-
-  const axiosSecure = axios.create({
-    baseURL: `http://localhost:5000`,
-  });
 
   useEffect(() => {
     // axios request interceptor
@@ -37,7 +37,7 @@ const useAxiosSecure = () => {
         return Promise.reject(error);
       }
     );
-  }, [logOut, navigate, axiosSecure]);
+  }, [logOut, navigate]);
 
   return [axiosSecure];
 };
