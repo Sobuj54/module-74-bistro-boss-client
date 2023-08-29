@@ -3,8 +3,10 @@ import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useEffect } from "react";
 import useAuth from "../../../hooks/useAuth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ cart, price }) => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
@@ -68,6 +70,25 @@ const CheckoutForm = ({ price }) => {
 
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
+
+      // save payment information
+      const payment = {
+        email: user?.email,
+        transactionId: paymentIntent.id,
+        price,
+        quantity: cart.length,
+        items: cart.map((item) => item._id),
+        itemsName: cart.map((item) => item.name),
+      };
+
+      axiosSecure.post("/payments", payment).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          toast.success("Successfully saved transaction information !", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      });
     }
   };
 
@@ -105,6 +126,7 @@ const CheckoutForm = ({ price }) => {
           Transaction Completed with transactionId : {transactionId}
         </p>
       )}
+      <ToastContainer />
     </>
   );
 };
