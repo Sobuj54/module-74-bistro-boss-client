@@ -8,7 +8,8 @@ const MyCart = () => {
   const [cart, refetch] = useCart();
 
   //   js reduce function is used to get sum of all the values
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  const sum = cart.reduce((sum, item) => sum + item.price, 0);
+  const total = parseFloat(sum.toFixed(2));
 
   const handleDelete = (item) => {
     Swal.fire({

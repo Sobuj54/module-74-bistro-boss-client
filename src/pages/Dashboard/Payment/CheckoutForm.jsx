@@ -77,17 +77,25 @@ const CheckoutForm = ({ cart, price }) => {
         email: user?.email,
         transactionId: paymentIntent.id,
         price,
+        date: new Date(),
+        status: "service pending",
         quantity: cart.length,
-        items: cart.map((item) => item._id),
+        menuItems: cart.map((item) => item.menuItemId),
+        cartItems: cart.map((item) => item._id),
         itemsName: cart.map((item) => item.name),
       };
 
       axiosSecure.post("/payments", payment).then((res) => {
         console.log(res.data);
-        if (res.data.insertedId) {
+        if (res.data.insertResult.insertedId) {
           toast.success("Successfully saved transaction information !", {
             position: toast.POSITION.TOP_CENTER,
           });
+          if (res.data.deleteResult.deletedCount > 0) {
+            toast.success("Successfully removed paid items from cart !", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          }
         }
       });
     }
