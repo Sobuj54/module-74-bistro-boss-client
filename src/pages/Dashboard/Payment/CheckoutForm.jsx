@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./CheckoutForm.css";
 
 const CheckoutForm = ({ cart, price }) => {
   const { user } = useAuth();

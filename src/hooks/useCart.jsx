@@ -14,7 +14,7 @@ const useCart = () => {
     enabled: !loading, //must use this enabled otherwise login will cause problem.
     // queryFn: async () => {
     //   const res = await fetch(
-    //     `http://localhost:5000/carts?email=${user?.email}`,
+    //     `https://bistro-boss-server-theta-virid.vercel.app/carts?email=${user?.email}`,
     //     {
     //       headers: {
     //         authorization: `bearer ${token}`,
