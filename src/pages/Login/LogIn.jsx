@@ -8,6 +8,7 @@ import { AuthContext } from "../../ContextApi/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
+import authentication from "../../assets/others/authentication1.png";
 
 const LogIn = () => {
   const [disabled, setDisabled] = useState(true);
@@ -55,17 +56,13 @@ const LogIn = () => {
         <title>Bistro Boss | Login</title>
       </Helmet>
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
-          <div className="text-center w-1/2 lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+        <div className="hero-content flex-col lg:flex-row gap-10">
+          <div className="w-1/2">
+            <img src={authentication} alt="login" className="w-full" />
           </div>
           <div className="card  w-full max-w-md shadow-2xl bg-base-100">
             <form onSubmit={handleLogin} className="card-body">
+              <h3 className="text-3xl font-bold text-center">Login Now!</h3>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -118,7 +115,7 @@ const LogIn = () => {
                 />
               </div>
             </form>
-            <p className="text-center py-5">
+            <p className="text-center">
               <small>
                 New Here?
                 <Link to="/signup" className="text-orange-500 ml-2">

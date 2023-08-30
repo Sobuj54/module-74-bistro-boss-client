@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../ContextApi/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
+import authentication from "../../assets/others/authentication2.png";
 
 const SignUp = () => {
   const {
@@ -60,16 +61,12 @@ const SignUp = () => {
       </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
-          <div className="text-center w-1/2 lg:text-left">
-            <h1 className="text-5xl font-bold">SignUp now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+          <div className="w-1/2">
+            <img src={authentication} alt="signup" />
           </div>
           <div className="card  w-full max-w-md shadow-2xl bg-base-100">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+              <h3 className="text-3xl font-bold text-center">SignUp Now !</h3>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -142,7 +139,7 @@ const SignUp = () => {
                 />
               </div>
             </form>
-            <p className="text-center py-5">
+            <p className="text-center">
               <small>
                 Already Have an Account?
                 <Link to="/login" className="text-orange-500 ml-2">
