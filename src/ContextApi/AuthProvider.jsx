@@ -18,20 +18,24 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [adminLoading, setAdminLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
 
   const googleSignIn = () => {
     setLoading(true);
+    setAdminLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   const createUser = (email, password) => {
     setLoading(true);
+    setAdminLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signIn = (email, password) => {
     setLoading(true);
+    setAdminLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -46,6 +50,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log(currentUser);
+      setLoading(false);
 
       // get and set token
       if (currentUser) {
@@ -56,7 +61,7 @@ const AuthProvider = ({ children }) => {
           .then((data) => {
             // console.log(data);
             localStorage.setItem("access-token", data.data.token);
-            setLoading(false);
+            setAdminLoading(false);
           });
       } else {
         localStorage.removeItem("access-token");
@@ -69,11 +74,13 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
+    setAdminLoading(true);
     return signOut(auth);
   };
 
   const authInfo = {
     user,
+    adminLoading,
     loading,
     createUser,
     signIn,

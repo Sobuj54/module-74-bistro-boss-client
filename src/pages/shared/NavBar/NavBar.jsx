@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../ContextApi/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
@@ -19,28 +19,28 @@ const NavBar = () => {
   const navOptions = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <Link to="/menu">Menu</Link>
+        <NavLink to="/menu">Menu</NavLink>
       </li>
       <li>
-        <Link to="/order/salad">Order Food</Link>
+        <NavLink to="/order/salad">Order Food</NavLink>
       </li>
       <li>
         {isAdmin ? (
-          <Link to="/dashboard/adminHome">Dashboard</Link>
+          <NavLink to="/dashboard/adminHome">Dashboard</NavLink>
         ) : (
-          <Link to="/dashboard/userHome">Dashboard</Link>
+          <NavLink to="/dashboard/userHome">Dashboard</NavLink>
         )}
       </li>
       <li>
-        <Link to="/dashboard/mycart">
+        <NavLink to="/dashboard/mycart">
           <button className="btn btn-sm gap-2">
             <FaShoppingCart />
             <div className="badge badge-secondary">+{cart?.length || 0}</div>
           </button>
-        </Link>
+        </NavLink>
       </li>
 
       {user ? (
@@ -49,7 +49,7 @@ const NavBar = () => {
         </li>
       ) : (
         <li>
-          <Link to="/login">Login</Link>
+          <NavLink to="/login">Login</NavLink>
         </li>
       )}
     </>
